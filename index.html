@@ -1,0 +1,1228 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vicerrectorado de Internacionalización · UAH</title>
+
+  <!-- Tipografía corporativa -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --uah-blue: #002C91;
+      --uah-blue-light: #0075F4;
+      --uah-blue-dark: #142456;
+      --uah-gold: #E1CA97;
+      --white: #FFFFFF;
+      --soft: #F3F7FF;
+      --text: #EAF0FF;
+      --overlay: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--uah-blue);
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: rgba(0, 44, 145, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav {
+      max-width: 1400px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .logo span {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--soft);
+      margin-bottom: 0.1rem;
+    }
+
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--soft);
+    }
+
+    nav ul li a {
+      transition: 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--uah-gold);
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      background: rgba(0, 44, 145, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      list-style: none;
+      flex-direction: column;
+      gap: 0;
+      font-size: 0.95rem;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.8rem 1.2rem;
+      color: var(--soft);
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-menu li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--uah-gold);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-video iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 67.5vw;
+      min-height: 100vh;
+      min-width: 213.33vh;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(0, 44, 145, 0.45),
+          rgba(20, 36, 86, 0.82));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 1.35rem;
+      max-width: 700px;
+      margin: auto;
+      color: var(--text);
+    }
+
+    .hero-btn {
+      margin-top: 1rem;
+      display: inline-block;
+      background: var(--uah-gold);
+      color: var(--uah-blue-dark);
+      padding: 1rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .3s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      background: white;
+    }
+
+
+    .initiative-tag {
+        display: inline-block;
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+      }
+
+    /* SECCIONES */
+    section {
+      padding: 1rem 1rem;
+    }
+
+    .container {
+      max-width: 1350px;
+      margin: auto;
+    }
+
+    .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .section-title span {
+      color: var(--uah-gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-top: .5rem;
+    }
+
+    /* GRID EXPERIENCIAS */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      position: relative;
+      min-height: 350px;
+      overflow: hidden;
+      border-radius: 26px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15));
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card h3 {
+      font-size: 2rem;
+      margin-bottom: .8rem;
+    }
+
+    .card p {
+      color: #E3EAFD;
+      max-width: 320px;
+    }
+
+    /* AGENDA */
+    .agenda {
+      background: linear-gradient(135deg, var(--uah-blue-dark), var(--uah-blue));
+      border-radius: 32px;
+      padding: 1rem;
+    }
+
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .event {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: 1rem;
+      transition: .3s ease;
+    }
+
+    .event-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 18px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .event-content h3 {
+      margin-bottom: .4rem;
+    }
+
+    .event:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .date {
+      color: var(--uah-gold);
+      font-weight: 700;
+      margin-bottom: .8rem;
+    }
+
+    /* MAP SECTION */
+    .map-section {
+      padding: 4rem 1rem 2rem;
+    }
+
+    .map-container {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a1a4a, #0d2257);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .world-map-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .continent {
+      fill: rgba(0, 117, 244, 0.15);
+      stroke: rgba(0, 117, 244, 0.25);
+      stroke-width: 0.5;
+      transition: fill 0.3s ease;
+    }
+
+    .continent:hover {
+      fill: rgba(0, 117, 244, 0.25);
+    }
+
+    .map-marker {
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .map-marker circle.dot {
+      fill: var(--uah-gold);
+      transition: 0.3s ease;
+      filter: drop-shadow(0 0 4px rgba(225, 202, 151, 0.6));
+    }
+
+    .map-marker.home circle.dot {
+      fill: #fff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+    }
+
+    .map-marker:hover circle.dot,
+    .map-marker.active circle.dot {
+      r: 7;
+      filter: drop-shadow(0 0 10px rgba(225, 202, 151, 0.9));
+    }
+
+    .map-marker .pulse {
+      fill: var(--uah-gold);
+      opacity: 0;
+    }
+
+    .map-marker.home .pulse {
+      fill: #fff;
+    }
+
+    .map-marker .pulse {
+      animation: mapPulse 2.5s ease-out infinite;
+    }
+
+    @keyframes mapPulse {
+      0% { opacity: 0.6; r: 4; }
+      100% { opacity: 0; r: 18; }
+    }
+
+    .map-tooltip {
+      position: absolute;
+      background: rgba(20, 36, 86, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(225, 202, 151, 0.3);
+      border-radius: 14px;
+      padding: 0.8rem 1.1rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: 0.25s ease;
+      z-index: 10;
+      min-width: 180px;
+    }
+
+    .map-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .map-tooltip h4 {
+      font-size: 0.95rem;
+      color: var(--uah-gold);
+      margin-bottom: 0.15rem;
+    }
+
+    .map-tooltip p {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .map-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0 0;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .map-legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .legend-dot.home {
+      background: white;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    }
+
+    .legend-dot.partner {
+      background: var(--uah-gold);
+      box-shadow: 0 0 6px rgba(225, 202, 151, 0.5);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--uah-gold);
+      color: var(--uah-blue-dark);
+      padding: 1rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: .3s ease;
+    }
+
+    /* UNIVERSITY GRID */
+    .uni-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .uni-region {
+      margin-top: 2rem;
+    }
+
+    .uni-region h3 {
+      font-size: 1.1rem;
+      color: var(--uah-gold);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(225, 202, 151, 0.2);
+    }
+
+    .uni-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .uni-card:hover,
+    .uni-card.active {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(225, 202, 151, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .uni-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .uni-card .uni-location {
+      font-size: 0.82rem;
+      color: var(--uah-gold);
+    }
+
+    .uni-card .uni-desc {
+      font-size: 0.82rem;
+      color: var(--text);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .uni-card.home-card {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    footer {
+      padding: 1rem 1rem;
+      text-align: center;
+      background: #021948;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      nav ul {
+        gap: 1rem;
+        font-size: .84rem;
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <img src="https://www.uah.es/shared/es/.galleries/imagen-institucional/logotipos-principales/vA_blanco_LogoPrincipal.png" alt="Universidad de Alcalá">
+        <span> Vicerrectorado de Internacionalización </span>
+        <img src="https://congresosalcala.fgua.es/descargas/logotipos/logotipo_eugloh.png"; style="height: 80px; "/>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="asisomos.html">Así somos</a></li>
+          
+          <li class="dropdown">
+            <a href="movilidad.html" class="dropdown-toggle">
+              Movilidad ▾
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="incoming.html">Incoming</a></li>
+              <li><a href="outgoing.html">Outgoing</a></li>
+            </ul>
+          </li>
+          
+          <li><a href="alianzas.html">Alianzas estratégicas</a></li>    
+          <li><a href="lengua.html">Lengua y cultura</a></li>
+          <li><a href="contacta.html">Contacta</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <!-- HERO VIDEO YOUTUBE -->
+    <div class="hero-video">
+      <iframe 
+      src="https://www.youtube.com/embed/b3OcvnzJA1Q?autoplay=1&mute=1&controls=0&loop=1&playlist=b3OcvnzJA1Q&playsinline=1" 
+      title="Internacionalización UAH" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="hero-content">
+      <h1>Vive la UAH global</h1>
+      <p> Personas, culturas y oportunidades internacionales en un campus conectado con el mundo
+      </p>
+    </div>
+  </section>
+
+  <!-- UNA UNIVERSIDAD ABIERTA AL MUNDO -->
+  <section id="abierta_al_mundo">
+    <div class="container">
+      <div class="section-title">
+        <span>Una universidad abierta al mundo</span>
+      </div>
+      <div class="experience-grid">
+
+        <a class="event" href="incoming.html">
+
+        <article class="card" style="background-image:url('https://img.freepik.com/fotos-premium/grupo-jovenes-multirraciales-divirtiendose-juntos-parque-ciudad-diversos-amigos-disfrutan-dia-al-aire-libre_442523-731.jpg');
+         background-size: cover;                
+          ">
+          <div class="card-content">
+            <span class="initiative-tag">Incoming</span>
+            <h3>Experience UAH</h3>
+            <p>
+              Vive una experiencia para conectar y crecer en una ciudad histórica llena de cultura, diversidad y abierta al mundo.
+            </p>
+          </div>
+        </article>
+      </a>
+      <a class="event" href="outgoing.html">
+
+        <article class="card" style="background-image:url('https://elucabista.com/wp-content/uploads/2015/06/estudiantes-extranjero.jpg');
+          background-size: cover;             
+          ">
+          <div class="card-content">
+            <span class="initiative-tag">Outgoing</span>
+            <h3>Cruza fronteras</h3>
+            <p>
+              Atrévete a salir al mundo con conexiones internacionales, programas de movilidad y experiencias que marcarán tu futuro.
+            </p>
+          </div>
+        </article>
+      </a>
+      <a class="event" href="alianzas.html">
+
+        <article class="card" style="background-image:url('https://ajuntament.barcelona.cat/agenda2030/sites/default/files/2020-01/cooperacio-foto-1024x576.jpg');
+          background-size: cover;             
+         ">
+          <div class="card-content">
+            <span class="initiative-tag">Proyectos</span>
+            <h3>Alianzas estratégicas</h3>
+            <p>
+              Proyectos internacionales, colaboración académica y redes globales para impulsar el conocimiento y la innovación.
+            </p>
+          </div>
+        </article>
+      </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA DEL MUNDO -->
+  <section id="mapa_del_mundo" class="map-section">
+    <div class="container">
+      <div class="section-title">
+        <span>Conectando talento global</span>
+      </div>
+      <div class="map-container" id="mapContainer">
+        <svg class="world-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="0" y1="250" x2="1000" y2="250" stroke="rgba(0,117,244,0.08)" stroke-width="0.5"/>
+          <line x1="500" y1="0" x2="500" y2="500" stroke="rgba(0,117,244,0.08)" stroke-width="0.5"/>
+          <line x1="0" y1="167" x2="1000" y2="167" stroke="rgba(0,117,244,0.05)" stroke-width="0.3"/>
+          <line x1="0" y1="333" x2="1000" y2="333" stroke="rgba(0,117,244,0.05)" stroke-width="0.3"/>
+
+          <!-- North America -->
+          <path class="continent" d="M80,60 L120,45 L170,40 L210,50 L230,65 L240,90 L235,110 L220,130 L200,145 L185,155 L170,165 L155,170 L140,168 L125,158 L110,145 L95,130 L85,110 L78,90 Z"/>
+          <!-- Central America -->
+          <path class="continent" d="M155,170 L165,175 L175,185 L185,195 L195,205 L200,215 L195,225 L185,230 L175,225 L170,215 L165,200 L160,185 Z"/>
+          <!-- South America -->
+          <path class="continent" d="M185,230 L200,235 L215,240 L230,260 L240,285 L245,310 L240,340 L230,365 L215,385 L200,400 L185,405 L175,395 L170,375 L168,350 L170,325 L175,300 L180,275 L182,255 Z"/>
+          <!-- Europe -->
+          <path class="continent" d="M440,55 L460,50 L480,55 L500,50 L520,55 L535,65 L540,80 L535,95 L525,108 L510,118 L495,125 L480,128 L465,125 L450,118 L440,108 L435,95 L433,80 Z"/>
+          <!-- Africa -->
+          <path class="continent" d="M460,135 L480,130 L505,135 L525,145 L540,160 L548,180 L550,205 L548,230 L540,255 L530,275 L515,290 L500,300 L485,305 L470,300 L458,285 L450,265 L445,240 L443,215 L445,190 L448,165 Z"/>
+          <!-- Asia -->
+          <path class="continent" d="M540,50 L580,40 L630,35 L690,40 L740,50 L780,60 L810,75 L830,95 L835,115 L825,135 L810,150 L790,160 L760,168 L730,172 L700,170 L670,165 L640,158 L610,148 L580,135 L560,120 L545,105 L540,85 Z"/>
+          <!-- Middle East -->
+          <path class="continent" d="M545,120 L565,125 L585,135 L600,148 L610,162 L605,175 L590,180 L575,175 L560,165 L550,150 L545,135 Z"/>
+          <!-- India -->
+          <path class="continent" d="M640,158 L660,155 L675,160 L685,175 L690,195 L685,215 L675,230 L660,238 L645,232 L638,218 L635,200 L635,180 Z"/>
+          <!-- Southeast Asia -->
+          <path class="continent" d="M730,172 L750,168 L770,175 L785,185 L795,200 L800,220 L795,240 L785,250 L770,255 L755,248 L745,235 L738,220 L735,200 L732,185 Z"/>
+          <!-- Australia -->
+          <path class="continent" d="M790,290 L815,280 L840,285 L860,295 L870,310 L868,330 L858,345 L840,355 L820,358 L800,350 L788,335 L782,315 Z"/>
+
+          <!-- Markers will be added by JS -->
+        </svg>
+
+        <div class="map-tooltip" id="mapTooltip">
+          <h4 id="tooltipName"></h4>
+          <p id="tooltipLocation"></p>
+        </div>
+      </div>
+
+      <div class="map-legend">
+        <span><i class="legend-dot home"></i> Universidad de Alcalá</span>
+        <span><i class="legend-dot partner"></i> Conexiones internacionales</span>
+      </div>
+      <br>
+      <div style="text-align:center;">
+      <div class="cta-btn">
+        <a href="universidades.html" 
+        target="_blank"
+        rel="noopener noreferrer">
+       Explora nuestra red internacional 
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPUS LIFE -->
+<section id="campus_life">
+  <div class="container">
+    <div class="section-title">
+      <span>Campus life</span>
+    </div>
+    <div class="agenda-grid">
+      <a class="event" href="evento.html">
+        <img class="event-image"
+             src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop"
+             alt="Welcome Day Internacional">
+
+        <div class="event-content">
+          <div class="date">14 oct · Rectorado</div>
+          <h3>Welcome Day Internacional</h3>
+          <p>Jornada de bienvenida con actividades multiculturales y networking.</p>
+        </div>
+      </a>
+      <a class="event" href="evento.html">
+        <img class="event-image"
+             src="https://www.alcalingua.com/sites/default/files/inline-images/alumnos-alcalingua_1.jpg"
+             alt="Convocatoria de movilidades">
+
+        <div class="event-content">
+          <div class="date">18 oct · Campus Guadalajara</div>
+          <h3>Convocatoria de movilidades</h3>
+          <p>Se convocan 133 movilidades internacionales para estudiantes de la UAH.</p>
+        </div>
+      </a>
+
+      <a class="event" href="evento.html">
+        <img class="event-image"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Halloween_Shop%2C_Derry%2C_September_2010_%2802%29.JPG/250px-Halloween_Shop%2C_Derry%2C_September_2010_%2802%29.JPG"
+             alt="Celebra Halloween">
+
+        <div class="event-content">
+          <div class="date">31 octubre · Plaza Cervantes</div>
+          <h3>Celebra Halloween</h3>
+          <p>Ven a la Plaza Cervantes y trae tu disfraz para interactuar con estudiantes internacionales.</p>
+        </div>
+      </a>
+
+      <a class="event" href="evento.html">
+        <img class="event-image"
+             src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+             alt="Actividades multiculturales">
+
+        <div class="event-content">
+          <div class="date">20 noviembre · Salón de actos del Rectorado</div>
+          <h3>Actividades multiculturales</h3>
+          <p>Actividades multiculturales organizadas con universidades internacionales.</p>
+        </div>
+      </a>
+
+      <a class="event" href="evento.html">
+      <img class="event-image" src="https://receptiongroup.wordpress.com/wp-content/uploads/2017/12/lorena-foto-reception.png" alt="Actividades multiculturales">
+      
+      <div class="event-content">
+
+        <div class="date">26 noviembre · Sala de Conferencias Internacionales</div>
+        <h3>Reunión de coordinadores</h3>
+        <p>
+          La vicerrectora y Pilar organizan una reunión con los coordinadores de programas.
+        </p>
+    </div>
+  </a>
+
+    </div>
+
+  </div>
+</section>
+
+  <!-- FOOTER -->
+
+  <footer id="contacta">
+    <p>
+      Vicerrectorado de Internacionalización · Universidad de Alcalá
+    </p>
+    <p>
+      vicerr.internacional@uah.es · www.uah.es
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      const universities = [
+        // Home
+        {
+          name: 'Universidad de Alcalá',
+          location: 'Alcalá de Henares, España',
+          region: 'europe',
+          x: 470,
+          y: 108,
+          home: true,
+          desc: 'Sede del Vicerrectorado de Internacionalización',
+        },
+        // Europe
+        {
+          name: 'Università di Bologna',
+          location: 'Bolonia, Italia',
+          region: 'europe',
+          x: 485,
+          y: 105,
+        },
+        {
+          name: 'Université Paris-Saclay',
+          location: 'París, Francia',
+          region: 'europe',
+          x: 462,
+          y: 98,
+        },
+        {
+          name: 'Ludwig-Maximilians-Universität',
+          location: 'Múnich, Alemania',
+          region: 'europe',
+          x: 495,
+          y: 95,
+        },
+        {
+          name: 'University of Leeds',
+          location: 'Leeds, Reino Unido',
+          region: 'europe',
+          x: 448,
+          y: 85,
+        },
+        {
+          name: 'Københavns Universitet',
+          location: 'Copenhague, Dinamarca',
+          region: 'europe',
+          x: 488,
+          y: 78,
+        },
+        {
+          name: 'Uniwersytet Jagielloński',
+          location: 'Cracovia, Polonia',
+          region: 'europe',
+          x: 518,
+          y: 90,
+        },
+        {
+          name: 'Universidade de Coimbra',
+          location: 'Coimbra, Portugal',
+          region: 'europe',
+          x: 452,
+          y: 112,
+        },
+        {
+          name: 'Universiteit Gent',
+          location: 'Gante, Bélgica',
+          region: 'europe',
+          x: 470,
+          y: 92,
+        },
+        {
+          name: 'Karlstads Universitet',
+          location: 'Karlstad, Suecia',
+          region: 'europe',
+          x: 505,
+          y: 72,
+        },
+        {
+          name: 'University of Helsinki',
+          location: 'Helsinki, Finlandia',
+          region: 'europe',
+          x: 525,
+          y: 62,
+        },
+        // Americas
+        {
+          name: 'Universidad de Buenos Aires',
+          location: 'Buenos Aires, Argentina',
+          region: 'america',
+          x: 210,
+          y: 380,
+        },
+        {
+          name: 'Universidad Nacional de Colombia',
+          location: 'Bogotá, Colombia',
+          region: 'america',
+          x: 195,
+          y: 215,
+        },
+        {
+          name: 'UNAM',
+          location: 'Ciudad de México, México',
+          region: 'america',
+          x: 150,
+          y: 170,
+        },
+        {
+          name: 'PUC-Rio',
+          location: 'Río de Janeiro, Brasil',
+          region: 'america',
+          x: 230,
+          y: 340,
+        },
+        {
+          name: 'University of Toronto',
+          location: 'Toronto, Canadá',
+          region: 'america',
+          x: 190,
+          y: 95,
+        },
+        {
+          name: 'UCLA',
+          location: 'Los Ángeles, EE.UU.',
+          region: 'america',
+          x: 105,
+          y: 115,
+        },
+        {
+          name: 'University of Michigan',
+          location: 'Ann Arbor, EE.UU.',
+          region: 'america',
+          x: 195,
+          y: 110,
+        },
+        {
+          name: 'Universidad de Chile',
+          location: 'Santiago, Chile',
+          region: 'america',
+          x: 215,
+          y: 400,
+        },
+        {
+          name: 'Universidad de Costa Rica',
+          location: 'San José, Costa Rica',
+          region: 'america',
+          x: 175,
+          y: 195,
+        },
+        // Asia & Oceania
+        {
+          name: 'University of Tokyo',
+          location: 'Tokio, Japón',
+          region: 'asia',
+          x: 830,
+          y: 100,
+        },
+        {
+          name: 'Tsinghua University',
+          location: 'Pekín, China',
+          region: 'asia',
+          x: 770,
+          y: 95,
+        },
+        {
+          name: 'Seoul National University',
+          location: 'Seúl, Corea del Sur',
+          region: 'asia',
+          x: 805,
+          y: 105,
+        },
+        { name: 'NUS', location: 'Singapur', region: 'asia', x: 755, y: 225 },
+        {
+          name: 'IIT Bombay',
+          location: 'Bombay, India',
+          region: 'asia',
+          x: 660,
+          y: 195,
+        },
+        {
+          name: 'Chulalongkorn University',
+          location: 'Bangkok, Tailandia',
+          region: 'asia',
+          x: 740,
+          y: 190,
+        },
+        {
+          name: 'University of Melbourne',
+          location: 'Melbourne, Australia',
+          region: 'asia',
+          x: 850,
+          y: 340,
+        },
+        {
+          name: 'University of Auckland',
+          location: 'Auckland, Nueva Zelanda',
+          region: 'asia',
+          x: 895,
+          y: 380,
+        },
+        // Africa
+        {
+          name: 'University of Cape Town',
+          location: 'Cape Town, Sudáfrica',
+          region: 'africa',
+          x: 485,
+          y: 290,
+        },
+        {
+          name: 'Université Mohammed V',
+          location: 'Rabat, Marruecos',
+          region: 'africa',
+          x: 458,
+          y: 140,
+        },
+        {
+          name: 'University of Nairobi',
+          location: 'Nairobi, Kenia',
+          region: 'africa',
+          x: 545,
+          y: 225,
+        },
+        {
+          name: 'Universidade Eduardo Mondlane',
+          location: 'Maputo, Mozambique',
+          region: 'africa',
+          x: 540,
+          y: 270,
+        },
+      ];
+
+      const svg = document.querySelector('.world-map-svg');
+      const container = document.getElementById('mapContainer');
+      const tooltip = document.getElementById('mapTooltip');
+      const tooltipName = document.getElementById('tooltipName');
+      const tooltipLocation = document.getElementById('tooltipLocation');
+
+      // Create SVG markers
+      universities.forEach((uni, i) => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.classList.add('map-marker');
+        if (uni.home) g.classList.add('home');
+        g.setAttribute('data-index', i);
+
+        // Pulse ring
+        const pulse = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'circle'
+        );
+        pulse.classList.add('pulse');
+        pulse.setAttribute('cx', uni.x);
+        pulse.setAttribute('cy', uni.y);
+        pulse.setAttribute('r', '4');
+        g.appendChild(pulse);
+
+        // Dot
+        const dot = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'circle'
+        );
+        dot.classList.add('dot');
+        dot.setAttribute('cx', uni.x);
+        dot.setAttribute('cy', uni.y);
+        dot.setAttribute('r', uni.home ? '5.5' : '4');
+        g.appendChild(dot);
+
+        svg.appendChild(g);
+      });
+
+      // Tooltip on hover
+      let activeMarker = null;
+
+      function showTooltip(uni, markerEl) {
+        tooltipName.textContent = uni.name;
+        tooltipLocation.textContent = uni.location;
+        tooltip.classList.add('visible');
+
+        const rect = container.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        const scaleX = svgRect.width / 1000;
+        const scaleY = svgRect.height / 500;
+
+        let left = uni.x * scaleX + svgRect.left - rect.left - 90;
+        let top = uni.y * scaleY + svgRect.top - rect.top - 60;
+
+        if (left < 10) left = 10;
+        if (left + 200 > rect.width) left = rect.width - 200;
+        if (top < 10) top = uni.y * scaleY + svgRect.top - rect.top + 20;
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      }
+
+      function hideTooltip() {
+        tooltip.classList.remove('visible');
+        if (activeMarker) {
+          activeMarker.classList.remove('active');
+          activeMarker = null;
+        }
+      }
+
+      svg.addEventListener('mouseover', function (e) {
+        const marker = e.target.closest('.map-marker');
+        if (!marker) return;
+        const idx = parseInt(marker.getAttribute('data-index'));
+        const uni = universities[idx];
+        if (activeMarker) activeMarker.classList.remove('active');
+        marker.classList.add('active');
+        activeMarker = marker;
+        showTooltip(uni, marker);
+
+        // Highlight corresponding card
+        document
+          .querySelectorAll('.uni-card.active')
+          .forEach((c) => c.classList.remove('active'));
+        const card = document.querySelector(
+          '.uni-card[data-index="' + idx + '"]'
+        );
+        if (card) card.classList.add('active');
+      });
+
+      svg.addEventListener('mouseout', function (e) {
+        const marker = e.target.closest('.map-marker');
+        if (!marker) return;
+        hideTooltip();
+        document
+          .querySelectorAll('.uni-card.active')
+          .forEach((c) => c.classList.remove('active'));
+      });
+
+      // Build university card grids
+      const regions = {
+        europe: document.getElementById('uniEurope'),
+        america: document.getElementById('uniAmerica'),
+        asia: document.getElementById('uniAsia'),
+        africa: document.getElementById('uniAfrica'),
+      };
+
+      universities.forEach((uni, i) => {
+        const grid = regions[uni.region];
+        if (!grid) return;
+        const card = document.createElement('div');
+        card.className = 'uni-card' + (uni.home ? ' home-card' : '');
+        card.setAttribute('data-index', i);
+        card.innerHTML =
+          '<h4>' +
+          uni.name +
+          '</h4>' +
+          '<div class="uni-location">' +
+          uni.location +
+          '</div>' +
+          (uni.desc ? '<div class="uni-desc">' + uni.desc + '</div>' : '');
+
+        card.addEventListener('mouseenter', function () {
+          const marker = svg.querySelector(
+            '.map-marker[data-index="' + i + '"]'
+          );
+          if (marker) {
+            if (activeMarker) activeMarker.classList.remove('active');
+            marker.classList.add('active');
+            activeMarker = marker;
+            showTooltip(uni, marker);
+          }
+        });
+
+        card.addEventListener('mouseleave', function () {
+          hideTooltip();
+          const marker = svg.querySelector(
+            '.map-marker[data-index="' + i + '"]'
+          );
+          if (marker) marker.classList.remove('active');
+        });
+
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+
+</html>

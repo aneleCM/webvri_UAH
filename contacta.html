@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacta - Vicerrectorado de Internacionalizacion - UAH</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --uah-blue: #002c91;
+        --uah-blue-light: #0075f4;
+        --uah-blue-dark: #142456;
+        --uah-gold: #e1ca97;
+        --white: #ffffff;
+        --soft: #f3f7ff;
+        --text: #eaf0ff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--uah-blue);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(0, 44, 145, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav {
+        max-width: 1400px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+      .logo span {
+        font-size: 0.8rem;
+        color: var(--soft);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        font-size: 0.95rem;
+        color: var(--soft);
+      }
+
+      nav a {
+        transition: 0.3s ease;
+      }
+      nav a:hover {
+        color: var(--uah-gold);
+      }
+
+      /* Dropdown Menu */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: rgba(0, 44, 145, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 0.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        list-style: none;
+        flex-direction: column;
+        gap: 0;
+        font-size: 0.95rem;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu li {
+        margin: 0;
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 0.8rem 1.2rem;
+        transition: all 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--uah-gold);
+      }
+
+     .hero {
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 44, 145, 0.5),
+            rgba(20, 36, 86, 0.9)
+          ),
+          url('https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1600')
+            center/cover;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .section-title {
+        margin-bottom: 3rem;
+      }
+
+      .section-title span {
+        color: var(--uah-gold);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .section-title h2 {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+        margin-top: 0.5rem;
+      }
+
+      .info-main {
+        background: linear-gradient(
+          135deg,
+          var(--uah-blue-dark),
+          var(--uah-blue)
+        );
+        border-radius: 32px;
+        padding: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .info-main h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--uah-gold);
+      }
+
+      .info-main > p {
+        color: var(--text);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .info-box {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        padding: 1.5rem;
+      }
+
+      .info-box h4 {
+        color: var(--uah-gold);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+      }
+
+      .info-box p,
+      .info-box a {
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .info-box a:hover {
+        color: var(--uah-gold);
+      }
+
+      .map-box {
+        grid-column: span 2;
+        min-height: 250px;
+      }
+
+      .map-box iframe {
+        width: 100%;
+        height: 220px;
+        border: 0;
+        border-radius: 16px;
+        margin-top: 0.5rem;
+      }
+
+      .coordinators-section {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .coordinator-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .coordinator-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 1.8rem;
+        transition: all 0.3s ease;
+      }
+
+      .coordinator-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+      }
+
+      .coordinator-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .coordinator-card p {
+        color: var(--text);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn-small {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.7rem 1.3rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+      }
+
+      .btn-small:hover {
+        background: white;
+      }
+
+      .offices-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .office-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+      }
+
+      .office-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
+        border-color: rgba(225, 202, 151, 0.3);
+      }
+
+      .office-map {
+        height: 180px;
+      }
+
+      .office-map iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .office-content {
+        padding: 1.5rem;
+      }
+
+      .office-content h4 {
+        font-size: 1.15rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .office-location {
+        color: var(--uah-gold);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.9rem 1.6rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+      }
+
+      .btn:hover {
+        background: white;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        background: #021948;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      @media (max-width: 900px) {
+        nav ul {
+          gap: 1rem;
+          font-size: 0.85rem;
+        }
+        .nav {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .map-box {
+          grid-column: span 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="index.html" class="logo">
+          <img
+            src="https://www.uah.es/shared/es/.galleries/imagen-institucional/logotipos-principales/vA_blanco_LogoPrincipal.png"
+            alt="UAH"
+          />
+          <span>Vicerrectorado de Internacionalizacion</span>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="asisomos.html">Asi somos</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle">Movilidad ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="incoming.html">Incoming</a></li>
+                <li><a href="outgoing.html">Outgoing</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#mapa_del_mundo">Alianzas</a></li>
+            <li><a href="lengua.html">Lengua y cultura</a></li>
+            <li>
+              <a href="contacta.html" style="color: var(--uah-gold)"
+                >Contacta</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Contacta con nosotros</h1>
+        <p>
+          Información, orientación y atención personalizada para la comunidad
+          académica de la UAH e internacional
+        </p>
+
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="info-main">
+          <h3>International Lounge</h3>
+          <p>
+            Visítanos en el Colegio de Santo Tomás para informarte sobre
+            programas de movilidad, becas internacionales y oportunidades en el
+            extranjero.
+          </p>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <h4>Horario</h4>
+              <p>Lunes a jueves: 10:00-13:00 y 15:30-17:00</p>
+              <p>Viernes: 10:00-13:00</p>
+            </div>
+
+            <div class="info-box">
+              <h4>Teléfono</h4>
+              <p>+34 91 885 6492</p>
+            </div>
+
+            <div class="info-box">
+              <h4>Ubicación</h4>
+              <p>Colegio de Santo Tomas, Alcalá de Henares</p>
+              <iframe
+                src="https://www.google.com/maps?q=Colegio+de+Santo+Tom%C3%A1s+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-main">
+          <h3>Consultas académicas y administrativas</h3>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <h4>Sobre tus estudios</h4>
+              <p style="color:red"> Falta imagen </p>
+              <br>
+              <p> El personal académico actúa como enlace entre los programas y su desarrollo formativo, velando por una adecuada calidad. <br>
+                
+               Resuelve tus dudas sobre los aspectos organizativos de tus estudios y recibe apoyo sobre  aspectos académicos de tus estudios.
+                <br>          <br>
+                <a
+              class="btn-small"
+              href="coord_academia.html"
+              target="_blank">
+              Pregúntanos </a
+            >
+            </div>
+
+            <div class="info-box">
+              <h4>Sobre tu programa</h4>
+              <p style="color:red"> Falta imagen </p>
+              <br>
+              <p>
+                El equipo técnico y administrativo se encarga de dar seguimiento y asegurar el correcto funcionamiento del programa. <br>
+                
+                Resuelve tus dudas sobre el funcionamiento de tu programa, sobre temas administrativos o recibe apoyo en cualquier momento del proceso.
+                </p>
+                <br>                <br>
+                <a
+              class="btn-small"
+              href="https://www.uah.es/export/sites/uah/es/internacional/.galleries/Galeria-de-desgargas-de-Internacional/Organigrama-Servicio-de-Relaciones-Internacionales-OFICINAS-PERIFERICAS.pdf"
+              target="_blank">
+              Pregúntanos </a
+            >
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>Atención presencial con reserva</span>
+          <p style="color:red">
+          ¿Esta parte hay que agruparla por campus: Histórico, Científico-tecnológico, Guadalajara, Torrejón?
+        <br>
+            Hay que revisar el documento https://www.uah.es/export/sites/uah/es/internacional/.galleries/Galeria-de-desgargas-de-Internacional/ATENCION-AL-PUBLICO-CITA-PREVIA.pdf y hablarlo con un técnico, hay cosas raras
+      </p>
+        </div>
+
+        <div class="offices-grid">
+
+          <div class="offices-grid">
+            <div class="office-card">
+              <div class="office-map">
+                <iframe
+                  src="https://www.google.com/maps?q=Colegio+de+Santo+Tomás+UAH&output=embed"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div class="office-content">
+                <h4>International incoming</h4>
+                <p class="office-location"></p>
+                <a
+                  class="btn"
+                  href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Foutlook.office.com%2Fbook%2FInternationalIncomingnoErasmusRectoradoIL%40o365.uah.es%2F&data=05%7C02%7Csilvia.alvarez%40uah.es%7C561e32ff3e0b4076fbc408de3bd362ac%7Cced2c5527d1f4731aa3a2f0ec9629e26%7C1%7C0%7C639013976240199299%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=W1BdjsFk8ULSbTLCc4Y010uoTJiFBhlj9u1PlPi%2Fn4Q%3D&reserved=0"
+                  target="_blank"
+                  >Solicitar cita</a
+                >
+              </div>
+            </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+Ciencias+Empesariales+Turismo+UAH&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Ciencias Economicas, Empresariales y Turismo </h4>
+              <p class="office-location">Campus histórico </p>
+              <p class="office-location"></p>
+              <a
+                class="btn"
+                href="https://bookings.cloud.microsoft/book/ORICampisCiudad2EdficioEconmicasDerecho@o365.uah.es/?ismsaljsauthenabled=true/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+Derecho+UAH&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Derecho </h4>
+              <p class="office-location"> Campus histórico </p>
+              <p class="office-location"></p>
+              <a
+                class="btn"
+                href="https://bookings.cloud.microsoft/book/ORICampisCiudad2EdficioEconmicasDerecho@o365.uah.es/?ismsaljsauthenabled=true/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+de+Filosof%C3%ADa+y+Letras+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Filosofía y Letras · Escuela de Arquitectura
+                </h4>
+              <p class="office-location">Campus histórico</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusCiudad1EdificioFilosofayLetras@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+de+Ciencias+Ambientales+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Ciencias </h4>
+              <p class="office-location">Campus externo</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusExternoEdificioCAmbientales@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+de+Ciencias+Ambientales+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Medicina y Ciencias de la Salud</h4>
+              <p class="office-location">Campus externo</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusExternoEdificioCAmbientales@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+de+Ciencias+Ambientales+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Medicina y Ciencias de la Salud</h4>
+              <p class="office-location">Campus externo</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusExternoEdificioCAmbientales@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Escuela+Polit%C3%A9cnica+Superior+Alcal%C3%A1+de+Henares&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Escuela Politécnica</h4>
+              <p class="office-location">Campus Externo</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusGuadalajaraEdificioMultidepartamental@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-map">
+              <iframe
+                src="https://www.google.com/maps?q=Facultad+de+Educaci%C3%B3n+Guadalajara+UAH&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="office-content">
+              <h4>Facultad de Educacion y TurismoCampus </h4>
+              <p class="office-location">Campus Guadalajara</p>
+              <a
+                class="btn"
+                href="https://outlook.office.com/book/ORICampusGuadalajaraEdificioMultidepartamental@o365.uah.es/"
+                target="_blank"
+                >Solicitar cita</a
+              >
+            </div>
+          </div>
+
+          <div class="office-card">
+            <div class="office-content" style="padding-top: 2rem">
+              <h4>Cardenal Cisneros</h4>
+              <p class="office-location">Centro Universitario</p>
+              <p style="color: var(--text); margin-bottom: 1rem">
+                Solicita cita contactando directamente con la oficina
+                internacional del centro.
+              </p>
+              <a
+                class="btn"
+                href="mailto:internacional.secretaria@cardenalcisneros.es"
+                >Enviar email</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Vicerrectorado de Internacionalizacion - Universidad de Alcala</p>
+      <p>vicerr.internacional@uah.es - www.uah.es</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Así somos - Vicerrectorado de Internacionalizacion - UAH</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --uah-blue: #002c91;
+        --uah-blue-light: #0075f4;
+        --uah-blue-dark: #142456;
+        --uah-gold: #e1ca97;
+        --white: #ffffff;
+        --soft: #f3f7ff;
+        --text: #eaf0ff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--uah-blue);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(0, 44, 145, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav {
+        max-width: 1400px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+      .logo span {
+        font-size: 0.8rem;
+        color: var(--soft);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        font-size: 0.95rem;
+        color: var(--soft);
+      }
+
+      nav a {
+        transition: 0.3s ease;
+      }
+      nav a:hover {
+        color: var(--uah-gold);
+      }
+
+      /* Dropdown Menu */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: rgba(0, 44, 145, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 0.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        list-style: none;
+        flex-direction: column;
+        gap: 0;
+        font-size: 0.95rem;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu li {
+        margin: 0;
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 0.8rem 1.2rem;
+        transition: all 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--uah-gold);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 44, 145, 0.5),
+            rgba(20, 36, 86, 0.9)
+          ),
+          url('https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1600')
+            center/cover;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title span {
+        color: var(--uah-gold);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .section-title h2 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-top: 0.5rem;
+      }
+
+      /* MISSION */
+      .mission-section {
+        background: linear-gradient(
+          135deg,
+          var(--uah-blue-dark),
+          var(--uah-blue)
+        );
+      }
+
+      .mission-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .mission-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--uah-gold);
+      }
+
+      .mission-text p {
+        color: var(--text);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+
+      .mission-image {
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      }
+
+      .mission-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* VALUES */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .value-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 2rem;
+        transition: all 0.4s ease;
+      }
+
+      .value-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
+        border-color: rgba(225, 202, 151, 0.3);
+      }
+
+      .value-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--uah-gold),
+          rgba(225, 202, 151, 0.6)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.6rem;
+      }
+
+      .value-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .value-card p {
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      /* NUMBERS */
+      .numbers-section {
+        background: linear-gradient(
+          180deg,
+          var(--uah-blue),
+          var(--uah-blue-dark)
+        );
+      }
+
+      .numbers-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
+
+      .number-item {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        transition: all 0.3s ease;
+      }
+
+      .number-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+      }
+
+      .number-value {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--uah-gold);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .number-label {
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      /* TEAM */
+      .team-section {
+        background: linear-gradient(
+          135deg,
+          var(--uah-blue-dark),
+          var(--uah-blue)
+        );
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .team-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.4s ease;
+      }
+
+      .team-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
+        border-color: rgba(225, 202, 151, 0.3);
+      }
+
+      .team-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1.5rem;
+        border: 4px solid var(--uah-gold);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .team-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .team-card .role {
+        color: var(--uah-gold);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+      }
+
+      .team-card p {
+        color: var(--text);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      /* CTA */
+      .cta-section {
+        text-align: center;
+        padding: 6rem 1.5rem;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 117, 244, 0.3),
+          rgba(0, 44, 145, 0.5)
+        );
+      }
+
+      .cta-section h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        background: white;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        background: #021948;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      @media (max-width: 900px) {
+        nav ul {
+          gap: 1rem;
+          font-size: 0.85rem;
+        }
+        .nav {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .mission-content {
+          grid-template-columns: 1fr;
+        }
+        .numbers-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="index.html" class="logo">
+          <img
+            src="https://www.uah.es/shared/es/.galleries/imagen-institucional/logotipos-principales/vA_blanco_LogoPrincipal.png"
+            alt="UAH"
+          />
+          <span>Vicerrectorado de Internacionalizacion</span>
+        </a>
+        <nav>
+          <ul>
+            <li>
+              <a href="asisomos.html" style="color: var(--uah-gold)"
+                >Asi somos</a
+              >
+            </li>
+            <li class="dropdown">
+              <a href="movilidad.html" class="dropdown-toggle">Movilidad ▾</a>
+              <ul class="dropdown-menu">
+                <li><a href="incoming.html">Incoming</a></li>
+                <li><a href="outgoing.html">Outgoing</a></li>
+              </ul>
+            </li>
+            <li><a href="alianzas.html">Alianzas estrategicas</a></li>
+            <li><a href="lengua.html">Lengua y cultura</a></li>
+            <li><a href="contacta.html">Contacta</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Así somos</h1>
+        <p>
+          Un equipo comprometido con la internacionalización, la diversidad y la
+          conexión de la UAH con el mundo.
+        </p>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <div class="container">
+        <div class="mission-content">
+          <div class="mission-text">
+            <h3>Nuestra mision</h3>
+            <p>
+              El Vicerrectorado de Internacionalización trabaja para que la
+              Universidad de Alcalá sea un referente en movilidad, colaboración
+              académica y apertura global.
+            </p>
+            <p>
+              Cooperamos en red con universidades e instituciones de los cinco
+              continentes para coordinar iniciativas internacionales que
+              enriquecen la experiencia de nuestra comunidad universitaria.
+            </p>
+            <p>
+              Creemos que la diversidad cultural y el diálogo internacional son
+              motores de conocimiento, innovación y crecimiento personal. Por
+              eso facilitamos que estudiantes, docentes e investigadores,
+              personal técnico y de administración y servicios vivan
+              experiencias transformadoras e innovadoras.
+            </p>
+            <p>
+              Nos comprometemos con la excelencia, ofreciendo servicios de
+              calidad, con atencion personalizada y apoyo integral a lo largo de
+              todo el proceso.
+            </p>
+          </div>
+          <div class="mission-image">
+            <img
+              src="https://media.gettyimages.com/id/2148821403/es/foto/group-of-international-exchange-university-students-looking-at-camera-smiling-outdoors.jpg?s=612x612&w=gi&k=20&c=PeDTkv6OXpeZGfiTo8DfMxw1Z7_LsYebT-1dSesxJMQ="
+              alt="Estudiantes internacionales"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="numbers-section">
+      <div class="container">
+        <div class="section-title">
+          <span>Impacto internacional en cifras</span>
+        </div>
+        <div class="numbers-grid">
+          <div class="number-item">
+            <div class="number-value">950?+</div>
+            <div class="number-label">Universidades colaboradoras</div>
+          </div>
+          <div class="number-item">
+            <div class="number-value">350?+</div>
+            <div class="number-label">Países conectados</div>
+          </div>
+          <div class="number-item">
+            <div class="number-value">3000+</div>
+            <div class="number-label">Movilidades anuales</div>
+          </div>
+
+          <div class="number-item">
+            <div class="number-value">XXX+</div>
+            <div class="number-label">Titulaciones con docencia en inglés</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EQUIPO -->
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>Dirección del Vicerrectorado</span>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Lorena-Beatriz-Silos-Ribas"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://media.licdn.com/dms/image/v2/D4E22AQHIFHQUegM1Kg/feedshare-shrink_800/B4EZ0rg2BEKIAc-/0/1774551523700?e=2147483647&v=beta&t=pjNJb-hQlDAuDUwxncsLv5ISljhSHme5FUznPzyL6RE"
+                alt="Vicerrectora"
+              />
+              <h3>Lorena Silos Ribas</h3>
+              <div class="role">Vicerrectora de Internacionalización</div>
+              Lidera la estrategia global de la UAH y representa al
+              Vicerrectorado en foros internacionales
+            </a>
+          </div>
+
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Ignacio-Bravo-Munoz"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8rKPhG6C6tvcrqPptAsqwtI1I7wGFSUFQtw&s"
+                alt="Director de Internacionalización"
+              />
+              <h3>Nacho Bravo Muñoz</h3>
+              <div class="role">Director de Internacionalización</div>
+              Gestiona los acuerdos bilaterales con universidades de todo el
+              mundo y coordina alianzas estratégicas
+            </a>
+          </div>
+
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Ingrid-Caceres-Wuersig/"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://media.licdn.com/dms/image/v2/C4D03AQFpH79wORejKw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1517375827344?e=2147483647&v=beta&t=wyLXFF-F9Tk30NPSB-DD-PwQvdiXKHegdUVU5Dclji0"
+                alt="Directora de Promoción Internacional y Campus Life"
+              />
+              <h3>Ingrid Cáceres Würsig</h3>
+              <div class="role">
+                Directora de Promoción Internacional y Campus Life
+              </div>
+              Organiza la bienvenida, acompañamiento de estudiantes
+              internacionales y actividades del Campus Life
+            </a>
+          </div>
+
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Elena-Campo-Montalvo/"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKctXp8MS6MkVe3uxAWKjjmTQ6rv5jAN7J_w&s"
+                alt="Directora de Cooperación Internacional Académica"
+              />
+              <h3>Elena Campo Montalvo</h3>
+              <div class="role">
+                Directora de Cooperación Internacional Académica
+              </div>
+              Impulsa programas de cooperación académica internacional y
+              proyectos conjuntos con universidades
+            </a>
+          </div>
+
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Juan-Jesus-Garcia-Dominguez/"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjer1PCGeU5HtW3mIpzDzjatCs7RoUzQf4MQ&s"
+                alt="Director de Campus Global"
+              />
+              <h3>Juan Jesús García Domínguez</h3>
+              <div class="role">Director de Campus Global</div>
+              Desarrolla proyectos de cooperacion y fortalece alianzas con
+              internacionales
+            </a>
+          </div>
+
+          <div class="team-card">
+            <a
+              href="https://www.uah.es/es/estudios/profesor/Maria-del-Pilar-Martin-Martin/"
+              target="_blank"
+            >
+              <img
+                class="team-avatar"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL-Oe9lbiV3kZIAhHLwpafLvO1tjliRyHXpA&s"
+                alt="Directora de Programas de Movilidad y Digitalización"
+              />
+              <h3>Pilar Martín Martín</h3>
+              <div class="role">
+                Directora de Programas de Movilidad y Digitalización
+              </div>
+              Coordina iniciativas de movilidad e innovación digital para
+              mejorar los servicios de movilidad internacional
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>Servicio de Internacionalización</span>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <img class="team-avatar" src="FOTO" alt="Jefe de Servicio" />
+            <h3>José Alfonso Lafuente García</h3>
+            <div class="role">Jefe de Servicio</div>
+            <p>
+              Coordina y supervisa al equipo para asegurar que el trabajo se
+              realice eficazmente cumpliendo objetivos
+            </p>
+          </div>
+
+          <div class="team-card">
+            <img class="team-avatar" src="" alt="Jefa de Sección" />
+            <h3>Silvia Álvarez Marín</h3>
+            <div class="role">Jefa de Sección</div>
+            <p>Ejerce como la responsable de la movilidad saliente Erasmus+</p>
+          </div>
+
+          <div class="team-card">
+            <img class="team-avatar" src="" alt="Secretaria" />
+            <h3>Elena Lara Buendía</h3>
+            <div class="role">
+              Secretaria del Vicerrectorado de Internacionalización
+            </div>
+            <p>
+              Apoya la gestión administrativa y organizativa del Vicerrectorado,
+              coordinando agenda, documentación y comunicaciones
+            </p>
+          </div>
+
+          <div class="team-card">
+            <a href="coord_admin.html" target="_blank">
+              <img
+                class="team-avatar"
+                src="https://lh6.googleusercontent.com/proxy/3VNA2VTIch6VYEItWUM4NfN-NW3OO8XUV1y8KqGor-_eNDheGcfmqyeR7KZFBIeFUqetQd_xguDBma485yvA6mZvnFPid57BeG_WDS4vT9hR6S2hsp0gs7Kjpm7CfFBx6WXZJ1X-nw"
+                alt="Personal"
+              />
+              <h3>Coordinadores administrativos</h3>
+              <div class="role">Equipo técnico y administrativo</div>
+
+              <p>
+                Realizan el seguimiento de los programas, asegurando su correcto
+                funcionamiento. Resuelven consultas sobre los programas, sobre
+                temas administrativas y proporcionan información a lo largo de
+                todo el proceso.
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- OMITO ESTA SECCIÓN, DADO QUE ESTARÍA EN CONTACTA
+  LA OTRA OPCIÓN ES PONER SOLO A PILAR MARTIN .
+  ES PARA QUE HAYA COHERENCIA ENTRE COORDINADORES DE PROGRAMAS Y ORI, QUE ESTÁ EN LA PÁGINA "CONTACTA"
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>Coordinadores académicos</span>
+        </div>
+
+          <div class="team-card">
+            <a href="coord_academia.html" target="_blank">
+              <img
+                class="team-avatar"
+                src="https://lh6.googleusercontent.com/proxy/3VNA2VTIch6VYEItWUM4NfN-NW3OO8XUV1y8KqGor-_eNDheGcfmqyeR7KZFBIeFUqetQd_xguDBma485yvA6mZvnFPid57BeG_WDS4vT9hR6S2hsp0gs7Kjpm7CfFBx6WXZJ1X-nw"
+                alt="Personal"
+              />
+              <h3>Coordinadores por en campus, facultades y escuelas</h3>
+              <div class="role">Equipo docente</div>
+              
+                <p>Actúan como enlace entre los programas y su desarrollo académico, velando por su adecuada calidad.
+
+                Tratan los aspectos académicos de tus estudios y proporcionan orientación durante tu trayectoria formativa.</p>
+  
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    />
+
+    <!-- FOOTER -->
+    <footer id="contacta">
+      <p>Vicerrectorado de Internacionalización · Universidad de Alcalá</p>
+      <p>vicer.internacional@uah.es · www.uah.es</p>
+    </footer>
+  </body>
+</html>

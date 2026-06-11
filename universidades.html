@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Conexiones internacionales</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --uah-blue: #002c91;
+        --uah-blue-light: #0075f4;
+        --uah-blue-dark: #142456;
+        --uah-gold: #e1ca97;
+        --white: #ffffff;
+        --soft: #f3f7ff;
+        --text: #eaf0ff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--uah-blue);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+
+        background: rgba(0, 44, 145, 0.82);
+        backdrop-filter: blur(18px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav {
+        max-width: 1400px;
+        margin: auto;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        color: var(--soft);
+      }
+
+      nav a:hover {
+        color: var(--uah-gold);
+      }
+
+      /* HERO */
+
+      .hero {
+        min-height: 20vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        background: linear-gradient(
+            rgba(0, 44, 145, 0.4),
+            rgba(20, 36, 86, 0.85)
+          ),
+          url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop');
+
+        background-size: cover;
+        background-position: center;
+
+        padding: 7rem 1rem 3rem;
+      }
+
+      .hero-content {
+        max-width: 900px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        margin-bottom: 1rem;
+        font-weight: 800;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--text);
+      }
+
+      /* SECCIONES */
+
+      section {
+        padding: 1rem 1rem;
+      }
+
+      .container {
+        max-width: 1350px;
+        margin: auto;
+      }
+
+      .section-title {
+        margin-bottom: 1rem;
+      }
+
+      .section-title span {
+        color: var(--uah-gold);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .section-title h2 {
+        font-size: clamp(2rem, 5vw, 4rem);
+      }
+
+      /* BUSCADOR */
+
+      .search-box {
+        margin-bottom: 2rem;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 1rem 1.2rem;
+
+        border: none;
+        border-radius: 18px;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        color: white;
+        font-size: 1rem;
+
+        outline: none;
+      }
+
+      .search-box input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* GRID */
+
+      .uni-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+      }
+
+      .uni-card {
+        background: rgba(255, 255, 255, 0.08);
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        border-radius: 22px;
+
+        padding: 1.5rem;
+
+        transition: 0.3s ease;
+      }
+
+      .uni-card:hover {
+        transform: translateY(-4px);
+
+        background: rgba(255, 255, 255, 0.12);
+
+        border-color: rgba(225, 202, 151, 0.3);
+      }
+
+      .uni-card h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.05rem;
+      }
+
+      .country {
+        color: var(--uah-gold);
+        font-size: 0.92rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .uni-card p {
+        color: var(--text);
+        font-size: 0.92rem;
+      }
+
+      /* MAP */
+      .map-container {
+        position: relative;
+        border-radius: 26px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0a1a4a, #0d2257);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        margin-bottom: 3rem;
+      }
+
+      .world-map-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .continent {
+        fill: rgba(0, 117, 244, 0.15);
+        stroke: rgba(0, 117, 244, 0.25);
+        stroke-width: 0.5;
+        transition: fill 0.3s ease;
+      }
+
+      .continent:hover {
+        fill: rgba(0, 117, 244, 0.25);
+      }
+
+      .map-marker {
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .map-marker circle.dot {
+        fill: var(--uah-gold);
+        transition: 0.3s ease;
+        filter: drop-shadow(0 0 4px rgba(225, 202, 151, 0.6));
+      }
+
+      .map-marker:hover circle.dot,
+      .map-marker.active circle.dot {
+        r: 8;
+        filter: drop-shadow(0 0 12px rgba(225, 202, 151, 0.95));
+      }
+
+      .map-marker .pulse {
+        fill: var(--uah-gold);
+        opacity: 0;
+        animation: mapPulse 2.5s ease-out infinite;
+      }
+
+      @keyframes mapPulse {
+        0% {
+          opacity: 0.6;
+          r: 4;
+        }
+        100% {
+          opacity: 0;
+          r: 18;
+        }
+      }
+
+      .map-tooltip {
+        position: absolute;
+        background: rgba(20, 36, 86, 0.95);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(225, 202, 151, 0.3);
+        border-radius: 14px;
+        padding: 0.8rem 1.1rem;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: 0.25s ease;
+        z-index: 10;
+        min-width: 180px;
+      }
+
+      .map-tooltip.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .map-tooltip h4 {
+        font-size: 0.95rem;
+        color: var(--uah-gold);
+        margin-bottom: 0.15rem;
+      }
+
+      .map-tooltip p {
+        font-size: 0.82rem;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .uni-card.highlighted {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: var(--uah-gold);
+        transform: translateY(-4px);
+      }
+
+      footer {
+        padding: 2rem 1rem;
+        text-align: center;
+        background: #021948;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      @media (max-width: 900px) {
+        .nav {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        nav ul {
+          gap: 1rem;
+          font-size: 0.84rem;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header>
+      <div class="nav">
+        <a
+          href="index.html"
+          style="display: flex; align-items: flex-end; gap: 1rem"
+        >
+          <img
+            src="https://www.uah.es/shared/es/.galleries/imagen-institucional/logotipos-principales/vA_blanco_LogoPrincipal.png"
+            alt="Universidad de Alcala"
+            style="height: 50px"
+          />
+          <span style="font-size: 0.75rem; color: #f3f7ff"
+            >Vicerrectorado de Internacionalizacion</span
+          >
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="asisomos.html">Así somos</a></li>
+            <li><a href="movilidad.html">Movilidad</a></li>
+            <li><a href="alianzas.html">Alianzas estratégicas</a></li>
+            <li><a href="lengua.html">Lengua y cultura</a></li>
+            <li><a href="contacta.html">Contacta</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Conexiones internacionales</h1>
+        <p>
+          Explora la red global de universidades e instituciones conectadas con
+          la Universidad de Alcala.
+        </p>
+      </div>
+    </section>
+
+    <!-- UNIVERSIDADES -->
+
+    <section>
+      <div class="container">
+        <!-- BUSCADOR -->
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar universidad..."
+          />
+        </div>
+
+        <!-- MAPA -->
+        <div class="map-container" id="mapContainer">
+          <svg
+            class="world-map-svg"
+            viewBox="0 0 1000 500"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="0"
+              y1="250"
+              x2="1000"
+              y2="250"
+              stroke="rgba(0,117,244,0.08)"
+              stroke-width="0.5"
+            />
+            <line
+              x1="500"
+              y1="0"
+              x2="500"
+              y2="500"
+              stroke="rgba(0,117,244,0.08)"
+              stroke-width="0.5"
+            />
+
+            <!-- Continents -->
+            <path
+              class="continent"
+              d="M80,60 L120,45 L170,40 L210,50 L230,65 L240,90 L235,110 L220,130 L200,145 L185,155 L170,165 L155,170 L140,168 L125,158 L110,145 L95,130 L85,110 L78,90 Z"
+            />
+            <path
+              class="continent"
+              d="M155,170 L165,175 L175,185 L185,195 L195,205 L200,215 L195,225 L185,230 L175,225 L170,215 L165,200 L160,185 Z"
+            />
+            <path
+              class="continent"
+              d="M185,230 L200,235 L215,240 L230,260 L240,285 L245,310 L240,340 L230,365 L215,385 L200,400 L185,405 L175,395 L170,375 L168,350 L170,325 L175,300 L180,275 L182,255 Z"
+            />
+            <path
+              class="continent"
+              d="M440,55 L460,50 L480,55 L500,50 L520,55 L535,65 L540,80 L535,95 L525,108 L510,118 L495,125 L480,128 L465,125 L450,118 L440,108 L435,95 L433,80 Z"
+            />
+            <path
+              class="continent"
+              d="M460,135 L480,130 L505,135 L525,145 L540,160 L548,180 L550,205 L548,230 L540,255 L530,275 L515,290 L500,300 L485,305 L470,300 L458,285 L450,265 L445,240 L443,215 L445,190 L448,165 Z"
+            />
+            <path
+              class="continent"
+              d="M540,50 L580,40 L630,35 L690,40 L740,50 L780,60 L810,75 L830,95 L835,115 L825,135 L810,150 L790,160 L760,168 L730,172 L700,170 L670,165 L640,158 L610,148 L580,135 L560,120 L545,105 L540,85 Z"
+            />
+            <path
+              class="continent"
+              d="M640,158 L660,155 L675,160 L685,175 L690,195 L685,215 L675,230 L660,238 L645,232 L638,218 L635,200 L635,180 Z"
+            />
+            <path
+              class="continent"
+              d="M730,172 L750,168 L770,175 L785,185 L795,200 L800,220 L795,240 L785,250 L770,255 L755,248 L745,235 L738,220 L735,200 L732,185 Z"
+            />
+            <path
+              class="continent"
+              d="M790,290 L815,280 L840,285 L860,295 L870,310 L868,330 L858,345 L840,355 L820,358 L800,350 L788,335 L782,315 Z"
+            />
+          </svg>
+
+          <div class="map-tooltip" id="mapTooltip">
+            <h4 id="tooltipName"></h4>
+            <p id="tooltipCountry"></p>
+          </div>
+        </div>
+
+        <!-- GRID -->
+        <div class="uni-grid" id="uniGrid"></div>
+      </div>
+    </section>
+
+    <!-- SCRIPT BUSCADOR Y MAPA -->
+
+    <script>
+      const universities = [
+        {
+          name: 'Universita di Bologna',
+          country: 'Italia',
+          desc: 'Programas Erasmus+, investigacion y movilidad internacional.',
+          x: 485,
+          y: 105,
+        },
+        {
+          name: 'Universite Paris-Saclay',
+          country: 'Francia',
+          desc: 'Cooperacion academica e intercambio cientifico.',
+          x: 462,
+          y: 98,
+        },
+        {
+          name: 'University of Leeds',
+          country: 'Reino Unido',
+          desc: 'Movilidad estudiantil y proyectos internacionales.',
+          x: 448,
+          y: 85,
+        },
+        {
+          name: 'Ludwig-Maximilians-Universitat',
+          country: 'Alemania',
+          desc: 'Investigacion y programas de intercambio.',
+          x: 495,
+          y: 95,
+        },
+        {
+          name: 'Universiteit Gent',
+          country: 'Belgica',
+          desc: 'Cooperacion academica europea.',
+          x: 470,
+          y: 92,
+        },
+        {
+          name: 'Universidade de Coimbra',
+          country: 'Portugal',
+          desc: 'Programas Iberoamericanos y Erasmus+.',
+          x: 452,
+          y: 112,
+        },
+        {
+          name: 'Kobenhavns Universitet',
+          country: 'Dinamarca',
+          desc: 'Investigacion internacional y movilidad.',
+          x: 488,
+          y: 78,
+        },
+        {
+          name: 'University of Helsinki',
+          country: 'Finlandia',
+          desc: 'Cooperacion nordica y programas de intercambio.',
+          x: 525,
+          y: 62,
+        },
+        {
+          name: 'Uniwersytet Jagiellonski',
+          country: 'Polonia',
+          desc: 'Programas Erasmus+ y colaboracion academica.',
+          x: 518,
+          y: 90,
+        },
+        {
+          name: 'Universidad de Buenos Aires',
+          country: 'Argentina',
+          desc: 'Programas de intercambio y cooperacion en investigacion.',
+          x: 210,
+          y: 380,
+        },
+        {
+          name: 'UNAM',
+          country: 'Mexico',
+          desc: 'Convenios estrategicos y actividades interculturales.',
+          x: 150,
+          y: 170,
+        },
+        {
+          name: 'Universidad Nacional de Colombia',
+          country: 'Colombia',
+          desc: 'Cooperacion academica y movilidad estudiantil.',
+          x: 195,
+          y: 215,
+        },
+        {
+          name: 'Universidad de Chile',
+          country: 'Chile',
+          desc: 'Intercambio academico y proyectos de investigacion.',
+          x: 215,
+          y: 400,
+        },
+        {
+          name: 'PUC-Rio',
+          country: 'Brasil',
+          desc: 'Programas de movilidad y colaboracion cientifica.',
+          x: 230,
+          y: 340,
+        },
+        {
+          name: 'University of Toronto',
+          country: 'Canada',
+          desc: 'Investigacion internacional y programas de intercambio.',
+          x: 190,
+          y: 95,
+        },
+        {
+          name: 'UCLA',
+          country: 'Estados Unidos',
+          desc: 'Colaboracion academica y proyectos de investigacion.',
+          x: 105,
+          y: 115,
+        },
+        {
+          name: 'University of Michigan',
+          country: 'Estados Unidos',
+          desc: 'Programas de movilidad y cooperacion cientifica.',
+          x: 195,
+          y: 110,
+        },
+        {
+          name: 'University of Tokyo',
+          country: 'Japon',
+          desc: 'Innovacion, internacionalizacion y movilidad global.',
+          x: 830,
+          y: 100,
+        },
+        {
+          name: 'Tsinghua University',
+          country: 'China',
+          desc: 'Investigacion internacional y programas academicos.',
+          x: 770,
+          y: 95,
+        },
+        {
+          name: 'Seoul National University',
+          country: 'Corea del Sur',
+          desc: 'Intercambio academico y colaboracion cientifica.',
+          x: 805,
+          y: 105,
+        },
+        {
+          name: 'NUS',
+          country: 'Singapur',
+          desc: 'Investigacion global y programas de intercambio.',
+          x: 755,
+          y: 225,
+        },
+        {
+          name: 'IIT Bombay',
+          country: 'India',
+          desc: 'Cooperacion tecnologica y movilidad estudiantil.',
+          x: 660,
+          y: 195,
+        },
+        {
+          name: 'Chulalongkorn University',
+          country: 'Tailandia',
+          desc: 'Programas de intercambio y colaboracion academica.',
+          x: 740,
+          y: 190,
+        },
+        {
+          name: 'University of Melbourne',
+          country: 'Australia',
+          desc: 'Redes globales de investigacion y cooperacion.',
+          x: 850,
+          y: 340,
+        },
+        {
+          name: 'University of Auckland',
+          country: 'Nueva Zelanda',
+          desc: 'Movilidad estudiantil y proyectos internacionales.',
+          x: 895,
+          y: 380,
+        },
+        {
+          name: 'University of Cape Town',
+          country: 'SudAfrica',
+          desc: 'Programas de colaboracion academica internacional.',
+          x: 485,
+          y: 290,
+        },
+        {
+          name: 'Universite Mohammed V',
+          country: 'Marruecos',
+          desc: 'Cooperacion euro-africana y programas de intercambio.',
+          x: 458,
+          y: 140,
+        },
+        {
+          name: 'University of Nairobi',
+          country: 'Kenia',
+          desc: 'Proyectos de investigacion y movilidad academica.',
+          x: 545,
+          y: 225,
+        },
+      ];
+
+      const svg = document.querySelector('.world-map-svg');
+      const container = document.getElementById('mapContainer');
+      const tooltip = document.getElementById('mapTooltip');
+      const tooltipName = document.getElementById('tooltipName');
+      const tooltipCountry = document.getElementById('tooltipCountry');
+      const uniGrid = document.getElementById('uniGrid');
+      const searchInput = document.getElementById('searchInput');
+
+      let activeMarker = null;
+      let activeCard = null;
+
+      // Create markers
+      universities.forEach((uni, i) => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.classList.add('map-marker');
+        g.setAttribute('data-index', i);
+
+        const pulse = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'circle'
+        );
+        pulse.classList.add('pulse');
+        pulse.setAttribute('cx', uni.x);
+        pulse.setAttribute('cy', uni.y);
+        pulse.setAttribute('r', '4');
+        g.appendChild(pulse);
+
+        const dot = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'circle'
+        );
+        dot.classList.add('dot');
+        dot.setAttribute('cx', uni.x);
+        dot.setAttribute('cy', uni.y);
+        dot.setAttribute('r', '5');
+        g.appendChild(dot);
+
+        svg.appendChild(g);
+      });
+
+      // Create cards
+      universities.forEach((uni, i) => {
+        const card = document.createElement('div');
+        card.className = 'uni-card';
+        card.setAttribute('data-index', i);
+        card.innerHTML =
+          '<h3>' +
+          uni.name +
+          '</h3><div class="country">' +
+          uni.country +
+          '</div><p>' +
+          uni.desc +
+          '</p>';
+        uniGrid.appendChild(card);
+
+        // Hover on card highlights marker
+        card.addEventListener('mouseenter', function () {
+          const idx = this.getAttribute('data-index');
+          const marker = svg.querySelector(
+            '.map-marker[data-index="' + idx + '"]'
+          );
+          if (marker) {
+            marker.classList.add('active');
+            showTooltip(universities[idx], marker);
+          }
+          if (activeCard) activeCard.classList.remove('highlighted');
+          this.classList.add('highlighted');
+          activeCard = this;
+        });
+
+        card.addEventListener('mouseleave', function () {
+          const marker = svg.querySelector(
+            '.map-marker[data-index="' + this.getAttribute('data-index') + '"]'
+          );
+          if (marker) marker.classList.remove('active');
+          hideTooltip();
+        });
+      });
+
+      // Hover on marker highlights card
+      svg.addEventListener('mouseover', function (e) {
+        const marker = e.target.closest('.map-marker');
+        if (!marker) return;
+        const idx = marker.getAttribute('data-index');
+        const uni = universities[idx];
+
+        if (activeMarker) activeMarker.classList.remove('active');
+        marker.classList.add('active');
+        activeMarker = marker;
+
+        showTooltip(uni, marker);
+
+        const card = uniGrid.querySelector(
+          '.uni-card[data-index="' + idx + '"]'
+        );
+        if (card) {
+          if (activeCard) activeCard.classList.remove('highlighted');
+          card.classList.add('highlighted');
+          activeCard = card;
+        }
+      });
+
+      svg.addEventListener('mouseout', function (e) {
+        const marker = e.target.closest('.map-marker');
+        if (!marker) return;
+        marker.classList.remove('active');
+        hideTooltip();
+        if (activeCard) activeCard.classList.remove('highlighted');
+      });
+
+      function showTooltip(uni, markerEl) {
+        tooltipName.textContent = uni.name;
+        tooltipCountry.textContent = uni.country;
+        tooltip.classList.add('visible');
+
+        const rect = container.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+        const scaleX = svgRect.width / 1000;
+        const scaleY = svgRect.height / 500;
+
+        let left = uni.x * scaleX + svgRect.left - rect.left - 90;
+        let top = uni.y * scaleY + svgRect.top - rect.top - 60;
+
+        if (left < 10) left = 10;
+        if (left + 200 > rect.width) left = rect.width - 200;
+        if (top < 10) top = uni.y * scaleY + svgRect.top - rect.top + 20;
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      }
+
+      function hideTooltip() {
+        tooltip.classList.remove('visible');
+      }
+
+      // Search functionality
+      searchInput.addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        const cards = uniGrid.querySelectorAll('.uni-card');
+        const markers = svg.querySelectorAll('.map-marker');
+
+        cards.forEach((card, i) => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(filter)) {
+            card.style.display = 'block';
+            markers[i].style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+            markers[i].style.opacity = '0.2';
+          }
+        });
+      });
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Vicerrectorado de Internacionalizacion - Universidad de Alcala</p>
+      <p>vicerr.internacional@uah.es - www.uah.es</p>
+    </footer>
+  </body>
+</html>

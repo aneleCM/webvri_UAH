@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Movilidad incoming outgoing UAH - Vicerrectorado de Internacionalización
+    </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --uah-blue: #002c91;
+        --uah-blue-light: #0075f4;
+        --uah-blue-dark: #142456;
+        --uah-gold: #e1ca97;
+        --white: #ffffff;
+        --soft: #f3f7ff;
+        --text: #eaf0ff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--uah-blue);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(0, 44, 145, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav {
+        max-width: 1400px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+      .logo span {
+        font-size: 0.8rem;
+        color: var(--soft);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        font-size: 0.95rem;
+        color: var(--soft);
+      }
+
+      nav a {
+        transition: 0.3s ease;
+      }
+      nav a:hover {
+        color: var(--uah-gold);
+      }
+
+      /* Dropdown Menu */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background: rgba(0, 44, 145, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 0.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        list-style: none;
+        flex-direction: column;
+        gap: 0;
+        font-size: 0.95rem;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu li {
+        margin: 0;
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 0.8rem 1.2rem;
+        transition: all 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--uah-gold);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 44, 145, 0.4),
+            rgba(20, 36, 86, 0.85)
+          ),
+          url('https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=1600')
+            center/cover;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      .hero-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+        box-shadow: 0 10px 40px rgba(225, 202, 151, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        background: white;
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: white;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title span {
+        color: var(--uah-gold);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .section-title h2 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-top: 0.5rem;
+      }
+
+      .section-title p {
+        color: var(--text);
+        max-width: 600px;
+        margin: 1rem auto 0;
+      }
+
+      /* WHY UAH */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 2rem;
+        transition: all 0.4s ease;
+      }
+
+      .feature-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-8px);
+        border-color: rgba(225, 202, 151, 0.3);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--uah-gold),
+          rgba(225, 202, 151, 0.6)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .feature-card p {
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      /* PROGRAMS */
+      .programs-section {
+        background: linear-gradient(
+          135deg,
+          var(--uah-blue-dark),
+          var(--uah-blue)
+        );
+      }
+
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .program-card {
+        position: relative;
+        min-height: 400px;
+        border-radius: 28px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        transition: all 0.5s ease;
+      }
+
+      .program-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      }
+
+      .program-card:hover {
+        transform: translateY(-10px) scale(1.02);
+      }
+
+      .program-content {
+        position: relative;
+        padding: 2rem;
+      }
+
+      .program-tag {
+        display: inline-block;
+        background: var(--uah-gold);
+        color: var(--uah-blue-dark);
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      .program-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .program-content p {
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+
+      .program-link {
+        color: var(--uah-gold);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* TIMELINE */
+      .timeline-section {
+        background: linear-gradient(
+          180deg,
+          var(--uah-blue),
+          var(--uah-blue-dark)
+        );
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .timeline-item {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 50%;
+        margin-bottom: 3rem;
+      }
+
+      .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-right: 0;
+        padding-left: 50%;
+      }
+
+      .timeline-content {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        padding: 1.5rem;
+        max-width: 350px;
+        position: relative;
+      }
+
+      .timeline-content::before {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: var(--uah-gold);
+        border-radius: 50%;
+        top: 50%;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content::before {
+        right: -35px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content::before {
+        left: -35px;
+      }
+
+      .timeline-date {
+        color: var(--uah-gold);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-content h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .timeline-content p {
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+
+      /* PRACTICAL INFO */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .info-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 1.8rem;
+        transition: all 0.3s ease;
+      }
+
+      .info-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+      }
+
+      .info-card h4 {
+        color: var(--uah-gold);
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .info-card p {
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      /* CTA */
+      .cta-section {
+        text-align: center;
+        padding: 6rem 1.5rem;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 117, 244, 0.2),
+          rgba(0, 44, 145, 0.4)
+        );
+      }
+
+      .cta-section h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        color: var(--text);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        background: #021948;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          gap: 1rem;
+          font-size: 0.85rem;
+        }
+        .nav {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .timeline::before {
+          left: 20px;
+        }
+        .timeline-item,
+        .timeline-item:nth-child(even) {
+          justify-content: flex-start;
+          padding-left: 50px;
+          padding-right: 0;
+        }
+        .timeline-item .timeline-content::before,
+        .timeline-item:nth-child(even) .timeline-content::before {
+          left: -35px;
+          right: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="index.html" class="logo">
+          <img
+            src="https://www.uah.es/shared/es/.galleries/imagen-institucional/logotipos-principales/vA_blanco_LogoPrincipal.png"
+            alt="UAH"
+          />
+          <span>Vicerrectorado de Internacionalización</span>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="asisomos.html">Así somos</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" style="color: var(--uah-gold)"
+                >Movilidad ▾</a
+              >
+              <ul class="dropdown-menu">
+                <li><a href="incoming.html">Incoming</a></li>
+                <li><a href="outgoing.html">Outgoing</a></li>
+              </ul>
+            </li>
+            <li><a href="alianzas.html">Alianzas estrategicas</a></li>
+            <li><a href="lengua.html">Lengua y cultura</a></li>
+            <li><a href="contacta.html">Contacta</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Experience UAH</h1>
+        <p>
+          Vive una experiencia internacional única en una de las universidades
+          más emblematicas de España
+        </p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="#programs">Descubre programas</a>
+          <a class="btn btn-secondary" href="contacta.html">Contáctanos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="why-uah">
+      <div class="container">
+        <div class="section-title">
+          <span>UAH: Una experiencia que marca la diferencia</span>
+          <p style="color:red"> Diseñar lo siguiente más sencillo, que no ocupe tanto espacio </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🏛️</div>
+            <h3>Patrimonio UNESCO</h3>
+            <p>
+              Estudia en una ciudad histórica declarada Patrimonio de la
+              Humanidad, cuna de Cervantes y con mas de 500 años de historia
+              universitaria.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Comunidad global</h3>
+            <p>
+              Más de xxx universidades colaboradoras en xxxx+ países. Conecta
+              con estudiantes de todo el mundo y construye tu red internacional.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <h3>Excelencia académica</h3>
+            <p>
+              Programas de calidad reconocidos internacionalmente, profesorado
+              de prestigio y metodologías innovadoras.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Apoyo personalizado</h3>
+            <p>
+              Equipo dedicado a acompanarte desde tu llegada. Welcome Day,
+              tutorías, actividades y más para facilitar tu integración.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Ubicación privilegiada</h3>
+            <p>
+              A solo 30 minutos del centro de Madrid. Disfruta de una ciudad
+              tranquila con acceso a toda la oferta cultural de la capital.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Asequible</h3>
+            <p>
+              Costo de vida accesible comparado con otras ciudades europeas.
+              Becas y ayudas disponibles para estudiantes internacionales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="programs-section">
+      <div class="container">
+        <div class="section-title">
+          <span>Encuentra tu programa ideal</span>
+        </div>
+        <div class="programs-grid">
+          <div
+            class="program-card"
+            style="
+              background-image: url('https://images.pexels.com/photos/1427399/pexels-photo-1427399.jpeg?auto=compress&cs=tinysrgb&w=800');
+            "
+          >
+            <div class="program-content">
+              <span class="program-tag">Erasmus+ incoming</span>
+              <h3>Estudiantes Eramus+</h3>
+              <p>
+                Vive una experiencia académica en UAH a traves del programa
+                Erasmus+. Más de xxxx plazas disponibles cada año.
+
+                <p style="color:red">
+                Enlazar con una página en la que se organice una línea de tiempo como la de más abajo y  la siguiente info: https://www.uah.es/es/internacional/movilidad-entrante-incoming-mobility/admision-y-matricula/
+                </p>
+
+              </p>
+          
+            </div>
+          </div>
+          <div
+            class="program-card"
+            style="
+              background-image: url('https://images.pexels.com/photos/277051/pexels-photo-277051.jpeg?auto=compress&cs=tinysrgb&w=800');
+            "
+          >
+
+            <div class="program-content">
+              <span class="program-tag">Programas y becas</span>
+              <h3>Estudiantes de movilidad global</h3>
+              <p>
+                Opciones flexibles para estudiar en la UAH a través de acuerdos
+                internacionales con universidades de fuera de Europa (no Erasmus+).
+
+                <p style="color:red">
+                Enlazar con una página en la que se organice una línea de tiempo como la de más abajo y la siguiente info: https://www.uah.es/es/internacional/movilidad-entrante-incoming-mobility/admision-y-matricula/
+                </p>
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="program-card"
+            style="
+              background-image: url('https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800');
+            "
+          >
+            <div class="program-content">
+              <a
+                class="event"
+                href="https://institutofranklin.net/"
+                target="_blank"
+              >
+                <span class="program-tag">Instituto Franklin</span>
+                <h3>Study in Spain, life UAH</h3>
+                <p>
+                Programa académico y cultural que conecta España y Estados
+                Unidos. Un puente entre dos culturas.
+                </p>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section">
+      <div class="container">
+        <div class="section-title">
+          <span>Proceso de aplicación</span>
+          <p style="color: red">
+            La siguiente línea temporal se utilizará para las páginas a las que apunten las dos "program card"anteriores. A tner en cuenta los siguientes enlaces:
+            https://www.uah.es/es/estudios/estudios-oficiales/, 
+            y
+            https://www.uah.es/es/internacional/movilidad-entrante-incoming-mobility/admision-y-matricula/,
+       
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">6+ meses antes</div>
+              <h4>Selecciona tu estudio</h4>
+              <p>
+                Contacta con tu oficina internacional y selecciona UAH como
+                destino
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">4-5 meses antes</div>
+              <h4>Envía documentación</h4>
+              <p>
+                Completa el formulario online y envia los documentos requeridos
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">3 meses antes</div>
+              <h4>Carta de aceptacion</h4>
+              <p>
+                Recibiras tu carta oficial de admisión para tramitar tu visado.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">2 semanas antes</div>
+              <h4>Prepara tu llegada</h4>
+              <p>
+                Alojamiento, vuelos y packing. Te enviamos una guía completa
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">Inicio del semestre</div>
+              <h4>Welcome Day</h4>
+              <p>Te recibimos con actividades de bienvenida y orientación</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practical">
+      <div class="container">
+        <div class="section-title">
+          <span>Información práctica</span>
+          <p style="color: red">
+            Las siguientes tarjetas contienen enlaces a: calendario académico,oferta de asignaturas en inglés,
+            residencias, ministerio (informacion y visados), "lengua y cultura",
+            Cercanías, Seguro médico. "
+          </p>
+        </div>
+        <div class="info-card">
+          <h4>🗓️ Calendario académico</h4>
+          <p>
+            Organiza tu estancia y consulta las fechas clave del curso, desde el
+            inicio de las clases a los periodos de evaluación.
+          </p>
+        </div>
+
+        <div class="info-card">
+        <h4>🗓️ Oferta de asignaturas en inglés</h4>
+        <p>
+          Organiza tu estancia y consulta las fechas clave del curso, desde el
+          inicio de las clases a los periodos de evaluación.
+        </p>
+      </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h4>🏠 Alojamiento</h4>
+            <p>
+              Residencias universitarias, pisos compartidos y apartamentos. Te
+              ayudamos a encontrar la mejor opción para ti.
+            </p>
+          </div>
+          <div class="info-card">
+            <h4>📋 Visado</h4>
+            <p>
+              Consulta si necesitas visado. También podemos asesorarte en el proceso de solicitud.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h4>🗣️ Lengua y cultura</h4>
+            <p>
+              Cursos en español e inglés para
+              estudiantes internacionales.
+            </p>
+          </div>
+          <div class="info-card">
+            <h4>🚅 Transporte</h4>
+            <p>
+              Tren directo a Madrid cada 15 min (30 min trayecto). Aeropuerto
+              Adolfo Suarez a 25 min en taxi.
+            </p>
+          </div>
+          <div class="info-card">
+            <h4>🏥 Salud</h4>
+            <p>Tarjeta Europea de Seguro de Enfermedad o seguro privado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Listo para comenzar tu aventura</h2>
+      <p>Nuestro equipo esta aquí para acompanarte en cada paso del proceso</p>
+      <a class="btn btn-primary" href="contacta.html">Contacta con nosotros</a>
+    </section>
+
+    <footer>
+      <p>Vicerrectorado de Internacionalización - Universidad de Alcala</p>
+      <p>vicerr.internacional@uah.es - www.uah.es</p>
+    </footer>
+  </body>
+</html>
